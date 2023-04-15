@@ -26,42 +26,95 @@
     </div>
     <div class="icons">
         <div class="search_icon">
-            <img src="https://github.com/Wiseman930/shoe-cart-api/blob/master/Images/ICONS/search-interface-symbol.png?raw=true" alt="search" class="search_image">
+            <img src="https://github.com/Wiseman930/shoe-cart-api/blob/master/Images/ICONS/search-interface-symbol.png?raw=true" alt="search" class="search_image" >
+            <div class="search_by">
+                <input type="text" class="search_name" name="fname" placeholder="Search"><label class="cancel">  cancel</label>
+              </div>
         </div>
         <div class="user_icon">
             <img src="https://github.com/Wiseman930/shoe-cart-api/blob/master/Images/ICONS/user-account.png?raw=true" alt="user_account" class="user_image">
+
+            <div class="login_sign">
+                <h4 class="welcome">WELCOME</h4>
+                <p class="log">Log In</p>
+                <p class="sign">Sign Up</p>
+            </div>
+
+            <div class="login_page">
+                <h2>Good to see you again.</h2>
+                <p class="log_your_account">Please log into your account.</p>
+
+                <input type="email" class="log_email" name="email" placeholder="Email Adress"><br>
+                <input type="password" class="log_passowrd" name="passowrd" placeholder="Password"><br>
+
+                <button class="log_in">Log In</button>
+                <p class="no_account">Don't have an account?  Sign up</p>
+            </div>
+
+            <div class="signup_page">
+                <h2>Create a password</h2>
+                <p class="sign_your_account">Please complete your sign up.</p>
+
+                <input type="email" class="sign_email" name="email" placeholder="Email Adress"><br>
+                <input type="password" class="sign_passowrd" name="passowrd" placeholder="Password"><br>
+
+                <button class="log_in">Sign In</button>
+                <p class="no_account">Already have an account?  Sign In</p>
+            </div>
+
         </div>
         <div class="cart_icon">
             <img src="https://github.com/Wiseman930/shoe-cart-api/blob/master/Images/ICONS/shopping-cart.png?raw=true" alt="" class="cart_image">
+
+            <div class="cart_items">
+                <h4 class="your_cart">YOUR CART IS EMPTY</h4>
+            </div>
+
         </div>
     </div>
 </div>
-<hr>
+<div class="all_content">
 <div class="shop_by">
     <h1>Shop By Brand</h1>
 </div>
 <div class="shop_brand">
     <div class="first_brands">
         <div class="afani">
-            <img src="https://github.com/Wiseman930/shoe-cart-api/blob/master/Images/ICONS/shopping-cart.png?raw=true" alt="" class="cart_image">
+            <img src="https://github.com/Wiseman930/shoe-cart-api/blob/master/Images/Afani/Black.JPG?raw=true" alt="" class="afani_image"><br>
+            <a href="https://www.freecodecamp.org/">
+                <button class="afani_btn">Shop Afani</button>
+            </a>
         </div>
         <div class="bellito">
-            <img src="https://github.com/Wiseman930/shoe-cart-api/blob/master/Images/ICONS/shopping-cart.png?raw=true" alt="" class="cart_image">
+            <img src="https://github.com/Wiseman930/shoe-cart-api/blob/master/Images/Bellito/Men's%20White%20boots.jpg?raw=true" alt="" class="bellito_image"><br>
+            <a href="https://www.freecodecamp.org/">
+                <button class="bellito_btn">Shop Bellito</button>
+              </a>
         </div>
         <div class="seruto">
-            <img src="https://github.com/Wiseman930/shoe-cart-api/blob/master/Images/ICONS/shopping-cart.png?raw=true" alt="" class="cart_image">
+            <img src="https://github.com/Wiseman930/shoe-cart-api/blob/master/Images/Seruto/Light-Blue.JPG?raw=true" alt="" class="seruto_image"><br>
+            <a href="https://www.freecodecamp.org/">
+                <button class="seruto_btn">Shop Seruto</button>
+              </a>
         </div>
     </div>
     <div class="second_brands">
         <div class="tago">
-            <img src="https://github.com/Wiseman930/shoe-cart-api/blob/master/Images/ICONS/shopping-cart.png?raw=true" alt="" class="cart_image">
+            <img src="https://github.com/Wiseman930/shoe-cart-api/blob/master/Images/Tago/brown.jpg?raw=true" alt="" class="tago_image"><br>
+            <a href="https://www.freecodecamp.org/">
+                <button class="tago_btn">Shop Tago</button>
+              </a>
         </div>
         <div class="zing">
-            <img src="https://github.com/Wiseman930/shoe-cart-api/blob/master/Images/ICONS/shopping-cart.png?raw=true" alt="" class="cart_image">
+            <img src="https://github.com/Wiseman930/shoe-cart-api/blob/master/Images/Zing/Green.jpg?raw=true" alt="" class="zing_image"><br>
+            <a href="https://www.freecodecamp.org/">
+                <button class="zing_btn">Shop Zing</button>
+              </a>
         </div>
     </div>
 </div>
 <footer>
+    <div class="footer">
     <div>
         <p>
             <b>Account</b><br>
@@ -89,7 +142,10 @@
             Our Stores<br>
         </p>
     </div>
+    </div>
+    <p class="rights">© 2023 All Rights Reserved</p>
 </footer>
+</div>
     <script src='./client.js'></script>
 </body>
 </html>

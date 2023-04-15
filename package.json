@@ -1,0 +1,29 @@
+{
+  "name": "shoe-cart-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Wiseman930/shoe-cart-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Wiseman930/shoe-cart-api/issues"
+  },
+  "homepage": "https://github.com/Wiseman930/shoe-cart-api#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "express-flash": "^0.0.2",
+    "express-handlebars": "^7.0.7",
+    "express-session": "^1.17.3",
+    "pg-promise": "^11.4.3"
+  }
+}
