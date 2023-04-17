@@ -2,7 +2,6 @@ const express = require("express");
 const exphbs = require("express-handlebars");
 const bodyParser = require("body-parser");
 const app = express();
-const myFunction = require('./shoes')
 const pgp = require("pg-promise")();
 const flash = require("express-flash");
 const session = require("express-session");
@@ -36,7 +35,7 @@ app.use(
     next()
   })
 
-const DATABASE_URL = process.env.DATABASE_URL || "postgresql://postgres:pg1999@localhost:5432/shoe_api";
+const DATABASE_URL = process.env.DATABASE_URL || "postgresql://postgres:pg1999@localhost:5432/full_shoe_cart";
 
 let useSSL = false;
 let local = process.env.LOCAL || false;
@@ -50,6 +49,8 @@ const config = {
     rejectUnauthorized: false,
   }, */
 }
+
+const myFunction = require('./shoes')
 const db = pgp(config);
 const myShoeFunction = myFunction(db)
 
@@ -58,7 +59,7 @@ const shoesApi = allShoesAPI(myShoeFunction)
 
 
 //API ROUTES
-
+app.get('/api/shoes/brand/:brand', shoesApi.homeFunction);
 
 let PORT = process.env.PORT || 3018;
 app.listen(PORT, function(){

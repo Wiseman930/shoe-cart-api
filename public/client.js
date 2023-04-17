@@ -12,6 +12,9 @@ const userSignIn = document.querySelector('.signup_page')
 const allConent = document.querySelector('.all_content')
 
 
+const clickAnyBrand = document.querySelectorAll('#brands')
+
+
 document.addEventListener('mouseup', function(e) {
     if (!cart_data.contains(e.target)) {
         cart_data.style.display = 'none';
@@ -75,8 +78,28 @@ showLSignIn.addEventListener('click', function(){
     }
 })
 
+let shoesElem = document.querySelector('.shoes');
+let shoesTemplateText = document.querySelector('.shoesTemplate');
+let theShoesTemplate = Handlebars.compile(shoesTemplateText.innerText);
+
+$('.shop_brand').on('click', '#brands', function (e) {
+
+    let url = window.location.href
+    const strs = url.split('=');
+    const id = Number(strs.at(-1))
 
 
+    axios
+    .get(`/api/shoes/brand/${id}`)
+    .then(result => {
+        let shoes = result.data;
+        let shoeData = shoes.data;
+        shoesElem.innerHTML = theShoesTemplate({
+        shoeData
+        });
+    });
+
+    });
 
 
 
