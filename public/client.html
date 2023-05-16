@@ -4,13 +4,56 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="/public/css/style.css">
     <link href="https://use.fontawesome.com/releases/v5.0.1/css/all.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js" integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.3/axios.min.js" integrity="sha512-0qU9M9jfqPw6FKkPafM3gy2CBAvUWnYVOfNPDYKVuRTel1PrciTj+a9P3loJB+j0QmN2Y0JYQmkBBS8W+mbezg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- for the shoes in stock -->
     <script class="shoesTemplate" type="text/x-template">
+        <div class="display_stock">
+        {{#each shoeData}}
+            <div class="brand_shoes">
+                    <img src="{{image}}" class="stock_images"><br>
+                    <b>{{brand}}</b> -
+                    {{shoe_name}} | size {{size}}<span class="prices">R{{price}}</span><br>
+                    <button type="button" name="button" class="add_cart" id={{id}}>Add to cart</button><span class="add_color">{{color}}</span>
+            </div>
+        {{/each}}
+        </div>
+    </script>
+
+    <script class="cartTemplate" type="text/x-template">
+
+        <div class="display_cart">
+            {{#each cartData}}
+                <div class="cart_shoes">
+                        <div>
+                            <img src="{{image}}" class="cart_images"><br>
+                        </div>
+                        <div>
+                            <div class="brand_name_size">
+                                <div>
+                                    <b>{{brand}}</b> | {{shoe_name}} {{quantity}}
+                                </div>
+                                <div>
+                                    size {{size}}<br>
+                                </div>
+                                </div>
+                            <div class="color_delete">
+                                <div>
+                                    <span class="add_color">{{color}}</span>
+                                </div>
+                                <div>
+                                    <img src="https://github.com/Wiseman930/shoe-cart-api/blob/master/Images/ICONS/delete-bin.png?raw=true" id={{id}} alt="search" class="bin_image">
+                                </div>
+                            </div>
+                            <span class="cart_prices"> R{{price}} </span>
+                        </div>
+                </div>
+            {{/each}}
+            </div>
+
     </script>
     <!-- -->
     <script class="cartTemplate" type="text/x-template">
@@ -18,8 +61,11 @@
 </head>
 <body>
 <div class="navigation">
-    <div class="about">
-        <P>About</P>
+    <div class="back_about">
+   <div class="back"><a href="/public/client.html">&#x2190</a></div>
+        <div class="about">
+            <P>About</P>
+        </div>
     </div>
     <div class="logo">
         <img src="https://github.com/Wiseman930/shoes_api/blob/master/images/BILLY.png?raw=true" alt="billy_logo" class="logo_image">
@@ -32,19 +78,25 @@
               </div>
         </div>
         <div class="user_icon">
-            <img src="https://github.com/Wiseman930/shoe-cart-api/blob/master/Images/ICONS/user-account.png?raw=true" alt="user_account" class="user_image">
-
+            <div class="user_color">
+                <img src="https://github.com/Wiseman930/shoe-cart-api/blob/master/Images/ICONS/user-account.png?raw=true" alt="user_account" class="user_image">
+                <span class="logged_in_color"></span>
+            </div>
             <div class="login_sign">
                 <h4 class="welcome">WELCOME</h4>
-                <p class="log">Log In</p>
-                <p class="sign">Sign Up</p>
+                <p class="log log_pointer">LOGIN</p>
+                <p class="sign log_pointer">SIGN UP</p>
+                <p class="logout log_pointer">LOGOUT</p>
             </div>
 
             <div class="login_page">
                 <h2>Good to see you again.</h2>
                 <p class="log_your_account">Please log into your account.</p>
 
+                <label class="em_log"> </label>
                 <input type="email" class="log_email" name="email" placeholder="Email Adress"><br>
+
+                <label class="pass_log"> </label>
                 <input type="password" class="log_passowrd" name="passowrd" placeholder="Password"><br>
 
                 <button class="log_in">Log In</button>
@@ -55,27 +107,29 @@
                 <h2>Create a password</h2>
                 <p class="sign_your_account">Please complete your sign up.</p>
 
-                <input type="email" class="sign_email" name="email" placeholder="Email Adress"><br>
+                <label class="email_sign"> </label>
+                <input type="email" class="sign_email" name="email" placeholder="Email Adress">
+
+                <label class="password_sign"> </label>
                 <input type="password" class="sign_passowrd" name="passowrd" placeholder="Password"><br>
 
-                <button class="log_in">Sign In</button>
+                <button class="sign_in">Sign In</button>
                 <p class="no_account">Already have an account?  Sign In</p>
             </div>
 
         </div>
         <div class="cart_icon">
             <img src="https://github.com/Wiseman930/shoe-cart-api/blob/master/Images/ICONS/shopping-cart.png?raw=true" alt="" class="cart_image">
-
             <div class="cart_items">
                 <h4 class="your_cart">YOUR CART IS EMPTY</h4>
+                <span class="carting"></span>
             </div>
-
         </div>
     </div>
 </div>
 <div class="all_content">
 <div class="shop_by">
-    <h1>Shop By Brand</h1>
+    <h1 class="shop_by_text">Shop By Brand</h1>
 </div>
 <div class="shop_brand">
     <div class="first_brands">
@@ -150,8 +204,10 @@
     </div>
     </div>
     <p class="rights">© 2023 All Rights Reserved</p>
-</footer>
+</footer>zz
 </div>
-    <script src='./client.js'></script>
+    <script src='./client.js' defer type="module"></script>
 </body>
 </html>
+
+

@@ -31,7 +31,6 @@ app.use(
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
     res.header("Access-Control-Headers", "Content-Type");
-    //res.header("Content-Type", "application/json")
     next()
   })
 
@@ -55,11 +54,17 @@ const db = pgp(config);
 const myShoeFunction = myFunction(db)
 
 const allShoesAPI = require('./api/shoeApi')
-const shoesApi = allShoesAPI(myShoeFunction)
+const shoesApi = allShoesAPI(myShoeFunction, session)
 
 
 //API ROUTES
-app.get('/api/shoes/brand/:brand', shoesApi.homeFunction);
+app.get('/api/shoes/brand/:brand', shoesApi.stockBrand);
+app.post('/api/shoes/register', shoesApi.registerUser)
+app.post('/api/shoes/login', shoesApi.loginUser)
+app.get('/api/shoes/logerror', shoesApi.getLogCount)
+app.post('/api/shoes/postcart', shoesApi.postUserCart)
+app.get('/api/shoes/getcart/:getcart', shoesApi.getCart);
+app.post('/api/shoes/removeitem', shoesApi.removeShoe)
 
 let PORT = process.env.PORT || 3018;
 app.listen(PORT, function(){

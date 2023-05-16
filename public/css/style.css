@@ -4,12 +4,17 @@ body{
     padding: 0;
     font-family: Trebuchet MS;
 }
-.about{
-    margin-top: auto;
-    margin-bottom: auto;
-    flex: 1;
-    margin-left: 80px;
-    justify-content: flex-start;
+
+.log_pointer {
+    cursor: pointer;
+}
+.back{
+    font-size: 35px;
+    display: none;
+}
+a {
+    text-decoration: none;
+    color: #000000;
 }
 .logo{
     margin-top: 10px;
@@ -55,8 +60,14 @@ body{
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 .shop_by{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 120px;
+}
+.shop_by_text{
     text-align: center;
-    font-size: larger;
 }
 .search_name{
     width: 450px;
@@ -86,7 +97,7 @@ h4{
     height: 150px;
     padding:30px;
     border-radius: 5px;
-    translate: -200px 30px;
+    transform: translate(-200px, 30px);
     position: fixed !important;
     z-index:1;
     border: 1px solid rgba(0, 0, 0, 0.2);
@@ -149,20 +160,26 @@ h4{
     height: 40px;
     margin-bottom: 30px;
 }
+.sign_in{
+    width: 100%;
+    height: 40px;
+    margin-bottom: 30px;
+}
 .log_your_account{
     margin-bottom: 15px;
 }
 .sign_your_account{
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 .cart_items{
     background-color: #FFFFFF;
-    width: 350px;
-    height: 100%;
+    width: 400px;
+    height: 75%;
     padding:30px;
     border-radius: 5px;
     translate: -370px 30px;
     position: fixed !important;
+    overflow:auto;
     z-index:1;
     border: 1px solid rgba(0, 0, 0, 0.2);
     display: none;
@@ -171,10 +188,16 @@ h4{
     margin-bottom: 20px;
 }
 .log{
-    color: rgba(0, 0, 0, 0.4)
+    color: rgba(0, 0, 0, 0.5);
+    font-size: smaller;
 }
 .sign{
-    color: rgba(0, 0, 0, 0.4)
+    color: rgba(0, 0, 0, 0.5);
+    font-size: smaller;
+}
+.logout{
+    color: rgba(0, 0, 0, 0.5);
+    font-size: smaller;
 }
 .footer{
 
@@ -185,8 +208,11 @@ h4{
 }
 footer{
     background-color: #00308F;
-    padding-top: 60px;
+    padding-top: 40px;
     padding-bottom: 10px;
+    position: relative;
+    /* negative value of footer height */
+    clear: both;
 }
 p{
     margin: 0;
@@ -196,9 +222,7 @@ p{
     margin-top: 60px;
     color: #FFFFFF;
 }
-.shop_by{
-    margin-top: 120px;
-}
+
 .shop_brand{
     text-align: center;
 }
@@ -265,3 +289,147 @@ p{
 .rights{
     text-align: center;
 }
+.stock_images{
+    width: 350px;
+    height: 350px;
+}
+
+.brand_shoes{
+padding: 30px
+}
+.display_stock{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    place-items:  center;
+    margin-bottom: 150px;
+}
+.prices{
+    float: right;
+}
+.add_cart{
+    float: right;
+}
+.add_cart{
+    width: 120px;
+    height: 25px;
+    font-family: Trebuchet MS;
+}
+.add_color{
+    color: rgba(0, 0, 0, 0.6);
+}
+.back_about{
+    margin-top: auto;
+    margin-bottom: auto;
+    flex: 1;
+    margin-left: 80px;
+    justify-content: flex-start;
+    text-align: center;
+}
+.logged_in_color{
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: green;
+  display: none;
+  transform: translate(-4px, -8px);
+  position: absolute;
+
+}
+.user_color{
+    flex: 1;
+}
+.email_sign{
+    color: red;
+    font-size: 12px
+}
+.password_sign{
+    color: red;
+    font-size: 12px;
+}
+.em_log{
+    color: red;
+    font-size: 12px
+}
+.pass_log{
+    color: red;
+    font-size: 12px;
+}
+.cart_images{
+    width: 150px;
+    height: 150px;
+}
+.display_cart{
+    display: grid;
+    grid-template-columns:1fr;
+}
+.cart_prices{
+    margin-left: 3px;
+
+}
+.cart_shoes{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 30px;
+}
+.color_delete{
+    display: grid;
+    grid-template-columns:  1fr 1fr;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.bin_image{
+    width: 20px;
+    height: 20px;
+    margin-left: 25px;
+
+}
+.brand_name_size{
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .about {
+    flex: 1;
+  }
+
+  .image {
+    flex: 1;
+    text-align: center;
+  }
+
+  .icons {
+    flex: 1;
+    display: flex;
+    text-align: right;
+  }
+  .search_icon{
+    flex: 1;
+  }
+  .user_icon{
+    flex: 1;
+  }
+  .cart_icon{
+    flex: 1;
+  }
+
+  .icon {
+    margin-left: 20px;
+  }
+
+  .icon:first-child {
+    margin-left: 0;
+  }
+
+  @media (max-width: 1253px) {
+    
+  }
