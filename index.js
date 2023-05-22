@@ -63,6 +63,7 @@ app.post('/api/shoes/register', shoesApi.registerUser)
 app.post('/api/shoes/login', shoesApi.loginUser)
 app.get('/api/shoes/logerror', shoesApi.getLogCount)
 app.post('/api/shoes/postcart', shoesApi.postUserCart)
+app.post('/api/shoes/postqty', shoesApi.postUserQty)
 app.get('/api/shoes/getcart/:getcart', shoesApi.getCart);
 app.post('/api/shoes/removeitem', shoesApi.removeShoe)
 

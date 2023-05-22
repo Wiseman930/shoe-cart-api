@@ -68,14 +68,50 @@ module.exports = function ShoeApi(db){
             [cart_items.brand_id, cart_items.color_id, cart_items.size_id, cart_items.price, 1, cart_items.id, user_id.id, cart_items.image_id])
            }
            if(count.count == 1 && stockQuantity.quantity > cartQuantity.quantity){
-            await db.oneOrNone(`UPDATE cart SET quantity=quantity+1 WHERE stock_id=$1 and register_id=$2`, [stock_id, user_id.id])
+           // await db.oneOrNone(`UPDATE cart SET quantity=quantity+1 WHERE stock_id=$1 and register_id=$2`, [stock_id, user_id.id])
            }
     }
+
+    async function postToQty(results){
+        let email = results.email;
+        let minus = results.minus;
+        let plus = results.plus;
+        let stock_id = results.stock;
+        let user_id =  await db.oneOrNone(`SELECT id FROM register WHERE email=$1`, [email])
+        let stock_price = await db.manyOrNone(`SELECT stock.price
+        FROM cart
+        INNER JOIN stock ON cart.stock_id = stock.id
+        INNER JOIN brands ON stock.brand_id = brands.id
+        INNER JOIN colors ON stock.color_id = colors.id
+        INNER JOIN sizes ON stock.size_id = sizes.id
+        INNER JOIN names ON stock.names_id = names.id
+        INNER JOIN stockImages on stock.image_id = stockImages.id
+        INNER JOIN register on cart.register_id = register.id
+        WHERE cart.register_id=$1 AND cart.id=$2 ORDER by cart.id`, [user_id.id, stock_id]);
+
+
+        let stockQuantity = await db.oneOrNone(`SELECT quantity FROM stock WHERE id=$1`, [stock_id])
+        let cartQuantity = await db.oneOrNone(`SELECT quantity FROM cart WHERE id=$1 and register_id=$2`, [stock_id, user_id.id])
+
+        if(minus == 'minus' && stockQuantity.quantity >= cartQuantity.quantity && cartQuantity.quantity > 1){
+            await db.oneOrNone(`UPDATE cart SET quantity=quantity-1 WHERE id=$1 and register_id=$2`, [stock_id, user_id.id])
+            await db.oneOrNone(`UPDATE cart SET price=price-$1 WHERE id=$2 and register_id=$3`, [stock_price[0].price, stock_id, user_id.id])
+
+        }
+        if(plus == 'plus' && stockQuantity.quantity > cartQuantity.quantity){
+            await db.oneOrNone(`UPDATE cart SET quantity=quantity+1 WHERE id=$1 and register_id=$2`, [stock_id, user_id.id])
+            await db.oneOrNone(`UPDATE cart SET price=price+$1 WHERE id=$2 and register_id=$3`, [stock_price[0].price, stock_id, user_id.id])
+        }
+
+    }
+
     async function displayCart(email){
         try{
             let cartShoes;
+            let count;
+            let total;
             let user_id = await await db.oneOrNone(`SELECT id FROM register WHERE email=$1`, [email]) || {}
-            cartShoes = await db.manyOrNone(`SELECT stock.id, brands.brand, colors.color, sizes.size, names.shoe_name, stock.price, cart.id, cart.quantity, stockImages.image
+            cartShoes = await db.manyOrNone(`SELECT stock.id, brands.brand, colors.color, sizes.size, names.shoe_name, cart.price, cart.id, cart.quantity, stockImages.image
             FROM cart
             INNER JOIN stock ON cart.stock_id = stock.id
             INNER JOIN brands ON stock.brand_id = brands.id
@@ -84,9 +120,19 @@ module.exports = function ShoeApi(db){
             INNER JOIN names ON stock.names_id = names.id
             INNER JOIN stockImages on stock.image_id = stockImages.id
             INNER JOIN register on cart.register_id = register.id
-            WHERE cart.register_id=$1 ORDER by cart.id`, [user_id.id])
+            WHERE cart.register_id=$1 ORDER by cart.id`, [user_id.id]);
 
-            return cartShoes;
+            count = await db.manyOrNone(`SELECT SUM(quantity) AS quantity FROM cart WHERE register_id=$1`, [user_id.id])
+
+            total = await db.manyOrNone('SELECT SUM(price) AS total FROM cart WHERE register_id=$1', [user_id.id])
+
+            const countObjects = cartShoes.map((object) => {
+                object.count = count[0].quantity;
+                object.total = total[0].total;
+                return object;
+            });
+
+            return countObjects;
         }catch(err){
             console.log(err)
         }
@@ -103,7 +149,8 @@ module.exports = function ShoeApi(db){
         getTheCount,
         postToCart,
         displayCart,
-        removeTheShoe
+        removeTheShoe,
+        postToQty
     }
 }
 

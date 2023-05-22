@@ -25,12 +25,10 @@ const app = initializeApp(firebaseConfig);
 //const analytics = getAnalytics(app);
 const auth = getAuth();
 
-
 const searchImg = document.querySelector('.search_image')
 const userImg = document.querySelector('.user_image')
 const cartImg = document.querySelector('.cart_image')
 const cancelSearch = document.querySelector('.cancel')
-const searchBar = document.querySelector('.search_by')
 const logSign = document.querySelector('.login_sign')
 const cart_data = document.querySelector('.cart_items')
 const showLogin = document.querySelector('.log')
@@ -57,6 +55,9 @@ const logButton = document.querySelector('.log_in')
 //Logout
 const logoutBtn = document.querySelector('.logout')
 
+//Logout
+const aboutBtn = document.querySelector('.about')
+
 //  Error Messages
 let err1 = document.querySelector('.password_sign')
 let err2 = document.querySelector('.email_sign')
@@ -73,12 +74,29 @@ const cartElem = document.querySelector('.carting')
 let cartTemplate = document.querySelector('.cartTemplate')
 let theCartTemplate = Handlebars.compile(cartTemplate.innerText)
 
+//Display proceed to cart
+const proceedElem = document.querySelector('.carting')
+let proceedTemplate = document.querySelector('.cartTemplate')
+let theProceedTemplate = Handlebars.compile(proceedTemplate.innerText)
+
 //Remove a shoe from the cart
 let removeShoe = document.querySelector('.bin_image')
+
+let body = document.querySelector('body')
+
+//qty
+let plus = document.querySelector('.minus')
+let minus = document.querySelector('.plus')
+
+//Go to checkout
+let shippingSection = document.querySelector('.shipping')
+let gotToCheck = document.querySelector('.proceed')
+let shopBrabdTxt = document.querySelector('.shop_by')
 
 document.addEventListener('mouseup', function(e) {
     if (!cart_data.contains(e.target)) {
         cart_data.style.display = 'none';
+        body.style.opacity = '';
     }
     if (!logSign.contains(e.target)) {
         logSign.style.display = 'none';
@@ -91,10 +109,6 @@ document.addEventListener('mouseup', function(e) {
     }
 });
 
-searchImg.addEventListener('click', function(){
-    searchBar.style.display = 'block'
-})
-
 userImg.addEventListener('click', function(){
     cart_data.style.display = 'none'
     if(logSign.style.display !== 'block' ){
@@ -104,6 +118,7 @@ userImg.addEventListener('click', function(){
         logSign.style.display = 'none'
     }
 })
+
 
 cartImg.addEventListener('click', function(){
     auth.onAuthStateChanged(user => {
@@ -125,14 +140,12 @@ cartImg.addEventListener('click', function(){
     logSign.style.display = 'none'
     if(cart_data.style.display !== 'block' ){
         cart_data.style.display = 'block'
+        body.style.opacity = 0.7;
     }
     else{
         cart_data.style.display = 'none'
+        body.style.opacity = '';
     }
-})
-
-cancelSearch.addEventListener('click', function(){
-    searchBar.style.display = 'none'
 })
 
 showLogin.addEventListener('click', function(){
@@ -171,6 +184,30 @@ function allCart(){
     })
 }
 
+let url2 = window.location.href
+const strs2 = url2.split('=');
+let page = strs2.at(-1)
+
+
+if(page == 'checkout'){
+    shippingSection.style.display = 'block'
+    removeBrands.style.display = 'none';
+    shopBrabdTxt.style.display = 'none';
+    
+}
+
+$('.carting').on('click', '.proceed', function (e) {
+    let url2 = window.location.href
+    const strs2 = url2.split('=');
+    let page = strs2.at(-1)
+
+    if(page == 'checkout'){
+        shippingSection.style.display = 'block'
+        removeBrands.style.display = 'none';
+        shopBrabdTxt.style.display = "none" 
+    }
+})
+
 $('.cart_items').on('click', '.bin_image', function (e) {
     let cart_id = event.target.id;
     axios
@@ -179,6 +216,52 @@ $('.cart_items').on('click', '.bin_image', function (e) {
     })
     .then(result => {
         allCart()
+    });
+})
+
+$('.cart_items').on('click', '.plus', function (e) {
+    let pluss = 'plus';
+    let stock_id = e.target.id
+    //alert('plus')
+
+    auth.onAuthStateChanged(user => {
+        let email
+            if(user !== null){
+                 email = user.email;
+                axios
+                .post("/api/shoes/postqty",{
+                    email: email,
+                    plus: pluss,
+                    stock: stock_id
+                    
+                })
+                .then(result => {
+                    allCart()
+                });
+            }
+    });
+})
+
+$('.cart_items').on('click', '.minus', function (e) {
+    let minuss = 'minus';
+    let stock_id = e.target.id
+    //alert('minus')
+   
+    auth.onAuthStateChanged(user => {
+        let email
+            if(user !== null){
+                 email = user.email;
+                axios
+                .post("/api/shoes/postqty",{
+                    email: email,
+                    minus: minuss,
+                    stock: stock_id
+                    
+                })
+                .then(result => {
+                    allCart()
+                });
+            }
     });
 })
 
@@ -287,6 +370,7 @@ function removeBrand(){
     if(Number.isInteger(id) == true){
         removeBrands.style.display = 'none';
         backArrow.style.display = 'block'
+        aboutBtn.style.display = 'none'
     }
 }
 
@@ -376,6 +460,7 @@ auth.onAuthStateChanged(user => {
       green_dot.style.display = 'none'
     }
   });
+
 
 
 

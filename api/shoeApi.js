@@ -82,6 +82,23 @@ module.exports = function(shoeService, session) {
 
         }
     }
+
+    async function postUserQty(req, res, next){
+        try {
+
+            let results = req.body;
+            if(results){
+            await shoeService.postToQty(results)        
+            }
+            res.json({
+                status: 'success',
+            });
+            
+        } catch (err) {
+            next(err);
+
+        }
+    }
     async function getCart(req, res, next){
         try{
 
@@ -133,7 +150,8 @@ module.exports = function(shoeService, session) {
         getLogCount,
         postUserCart,
         getCart,
-        removeShoe
+        removeShoe,
+        postUserQty
 
     }
 }
