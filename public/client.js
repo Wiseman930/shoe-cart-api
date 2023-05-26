@@ -53,7 +53,7 @@ const logPassowrd = document.querySelector('.log_passowrd')
 const logButton = document.querySelector('.log_in')
 
 //Logout
-const logoutBtn = document.querySelector('.logout')
+const logoutBtn = document.querySelector('.logoutBtn')
 
 //Logout
 const aboutBtn = document.querySelector('.about')
@@ -74,10 +74,10 @@ const cartElem = document.querySelector('.carting')
 let cartTemplate = document.querySelector('.cartTemplate')
 let theCartTemplate = Handlebars.compile(cartTemplate.innerText)
 
-//Display proceed to cart
-const proceedElem = document.querySelector('.carting')
-let proceedTemplate = document.querySelector('.cartTemplate')
-let theProceedTemplate = Handlebars.compile(proceedTemplate.innerText)
+//Shipping Info
+const shippingElem = document.querySelector('.shipp-information')
+let shippingTemplate = document.querySelector('.shippingTemplate')
+let theShippingTemplate = Handlebars.compile(shippingTemplate.innerText)
 
 //Remove a shoe from the cart
 let removeShoe = document.querySelector('.bin_image')
@@ -92,6 +92,158 @@ let minus = document.querySelector('.plus')
 let shippingSection = document.querySelector('.shipping')
 let gotToCheck = document.querySelector('.proceed')
 let shopBrabdTxt = document.querySelector('.shop_by')
+let menu = document.querySelector('.menu_icon')
+let icons = document.querySelector('.icons')
+
+//Show sing in and up
+let showIn = document.querySelector('.show_in')
+let showUp = document.querySelector('.show_up')
+
+//empty cart
+let empty = document.querySelector('.empty_cart')
+
+//shipping section
+let shippingData = document.querySelector('.fill-shipping-data')
+let shipEmail = document.querySelector('.logged-email')
+let editClose = document.querySelector('.edit-shipping-1')
+
+
+const fullName = document.querySelector(".full-name-1");
+const selectCountry = document.querySelector(".country-1");
+const streetAdress = document.querySelector(".street-address-1");
+const city = document.querySelector(".city-1");
+const province = document.querySelector(".input-field-1");
+const postalCode = document.querySelector(".input-field-2");
+const phoneNumber = document.querySelector(".phone-number-1");
+
+const addShippingInfo = document.querySelector(".add-shipping-1");
+const placeOrder = document.querySelector(".place-order-1");
+
+const countTheItem = document.querySelector('.count-items')
+
+
+
+addShippingInfo.addEventListener('click', function(){
+// Name error
+const nameError = document.querySelector(".name-error");
+// Country error
+const countryError = document.querySelector(".country-error");
+// Address error
+const addressError = document.querySelector(".address-error");
+// City error
+const cityError = document.querySelector(".city-error");
+// Province error
+const provinceError = document.querySelector(".province-error");
+// Postal error
+const postalError = document.querySelector(".postal-error");
+// Phone error
+const phoneError = document.querySelector(".phone-error");
+
+
+
+
+    let fullNames =  fullName.value;
+    let country = selectCountry.value;
+    let address = streetAdress.value;
+    let theCity = city.value
+    let theProvince = province.value;
+    let thePostalCode = postalCode.value;
+    let thePhoneNumber =  phoneNumber.value;
+
+    auth.onAuthStateChanged(user => {
+        if(fullNames == ''){
+            nameError.style.display = "block";
+            nameError.innerHTML = 'Full Name is required'
+        }
+        if(country == ''){
+            countryError.style.display = "block";
+            countryError.innerHTML = 'Country is required'
+        }
+        if(address == ''){
+            addressError.style.display = "block"
+            addressError.innerHTML = 'Street Adress is required'
+        }
+        if(theCity == ''){
+            cityError.style.display = "block";
+            cityError.innerHTML = 'City is required'
+        }
+        if(theProvince == ''){
+            provinceError.style.display = "block";
+            provinceError.innerHTML = 'Province is required'
+        }
+        if(thePostalCode == ''){
+            postalError.style.display = "block";
+            postalError.innerHTML = 'Postal Code is required'
+        }
+        if(thePhoneNumber == ''){
+            phoneError.style.display = "block";
+            phoneError.innerHTML = 'Phone Number is required'
+        }
+
+        setTimeout(() => {
+            nameError.style.display = "none";
+            countryError.style.display = "none";
+            addressError.style.display = "none";
+            cityError.style.display = "none";
+            provinceError.style.display = "none";
+            postalError.style.display = "none";
+            phoneError.style.display = "none";
+          }, 5000);
+
+        if(user !== null && !fullNames == '' && !country == '' && !address == '' && !theCity == '' && !theProvince == '' && !thePostalCode == '' && !thePhoneNumber == ''){
+            let email = user.email;
+            
+            axios
+            .post("/api/shoes/shippinginfo",{
+                email: email,
+                fullName: fullNames,
+                country: country,
+                address: address,
+                city: theCity,
+                province: theProvince,
+                postalCode: thePostalCode,
+                phoneNumber: thePhoneNumber,
+            })
+            .then(result => {
+
+            });
+        }
+    })
+
+})
+
+
+auth.onAuthStateChanged(user => {
+let email = user.email
+
+    if(user !== null){
+        axios
+        .get(`/api/shoes/shipinfo/${email}`)
+        .then(result => {
+            let results = result.data;
+            let data2 = results.data;
+            shippingElem.innerHTML = theShippingTemplate({
+            data2
+            });
+        });
+    }
+
+});
+
+
+axios.defaults.baseURL = 'http://localhost:3018/';
+
+editClose.addEventListener('click', function(){
+  
+    var text = this.textContent;
+    if (text == "Edit") {
+        this.textContent = "Close";
+        shippingData.style.display = 'block'
+      } else {
+        this.textContent = "Edit";
+        shippingData.style.display = 'none'
+      }
+})
 
 document.addEventListener('mouseup', function(e) {
     if (!cart_data.contains(e.target)) {
@@ -107,7 +259,21 @@ document.addEventListener('mouseup', function(e) {
     if (!userSignIn.contains(e.target)) {
         userSignIn.style.display = 'none';
     }
+    if (!icons.contains(e.target) && window.innerWidth < 900) {
+        icons.style.display = 'none';
+    }
 });
+
+showUp.addEventListener('click', function(){
+    userlogin.style.display = 'none';
+    userSignIn.style.display = 'block';
+})
+
+showIn.addEventListener('click', function(){
+    userlogin.style.display = 'block';
+    userSignIn.style.display = 'none';
+
+})
 
 userImg.addEventListener('click', function(){
     cart_data.style.display = 'none'
@@ -119,17 +285,107 @@ userImg.addEventListener('click', function(){
     }
 })
 
+menu.addEventListener('click', function(){
+    if(icons.style.display = 'none'){
+        icons.style.display = 'flex'
+    }
+})
+
+
+
+function allCart(){
+    auth.onAuthStateChanged(user => {
+        if(user !== null){
+           let email = user.email;
+            axios
+            .get(`/api/shoes/getcart/${email}`)
+            .then(result => {
+                let cart = result.data;
+                let cartData = cart.data;
+
+                if (!cartData.length == 0) {
+                    empty.style.display = 'none'
+                }
+                if (cartData.length == 0) {
+                    empty.style.display = 'block'
+                }
+                let countItem = cartData[0].count
+
+                if(countItem > 1){
+                    for (var i = 0; i < cartData.length; i++) {
+                        cartData[i].string = "s";
+                      }  
+                }else{
+                    for (var i = 0; i < cartData.length; i++) {
+                        cartData[i].string = " ";
+                      }
+                }
+                cartElem.innerHTML = theCartTemplate({
+                cartData
+                });
+            });
+        }
+    })
+}
+
+auth.onAuthStateChanged(user => {
+    if(user !== null){
+        let email = user.email;
+        axios
+        .get(`/api/shoes/getcart/${email}`)
+        .then(result => {
+            let cart = result.data;
+            let cartData = cart.data;
+            if (!cartData.length == 0) {
+                empty.style.display = 'none'
+            }
+            if (cartData.length == 0) {
+                empty.style.display = 'block'
+            }
+            let countItem = cartData[0].count
+
+            if(countItem > 1){
+                for (var i = 0; i < cartData.length; i++) {
+                    cartData[i].string = "s";
+                  }   
+            }else{
+                for (var i = 0; i < cartData.length; i++) {
+                    cartData[i].string = "";
+                  } 
+            }
+
+            cartElem.innerHTML = theCartTemplate({
+            cartData
+            });
+        });
+    }
+})
+
+
+
+
 
 cartImg.addEventListener('click', function(){
     auth.onAuthStateChanged(user => {
 
         if(user == null){
             let email = {};
+            empty.style.display = 'block'
             axios
             .get(`/api/shoes/getcart/${email}`)
             .then(result => {
                 let cart = result.data;
                 let cartData = cart.data;
+                let countItem = cartData[0].count
+                if(countItem > 1){
+                    for (var i = 0; i < cartData.length; i++) {
+                        cartData[i].string = "s";
+                      }   
+                }else{
+                    for (var i = 0; i < cartData.length; i++) {
+                        cartData[i].string = "";
+                      } 
+                }
                 cartElem.innerHTML = theCartTemplate({
                 cartData
                 });
@@ -140,7 +396,7 @@ cartImg.addEventListener('click', function(){
     logSign.style.display = 'none'
     if(cart_data.style.display !== 'block' ){
         cart_data.style.display = 'block'
-        body.style.opacity = 0.7;
+        body.style.opacity = '';
     }
     else{
         cart_data.style.display = 'none'
@@ -167,22 +423,6 @@ showLSignIn.addEventListener('click', function(){
         userSignIn.style.display = 'none'
     }
 })
-function allCart(){
-    auth.onAuthStateChanged(user => {
-        if(user !== null){
-           let email = user.email;
-            axios
-            .get(`/api/shoes/getcart/${email}`)
-            .then(result => {
-                let cart = result.data;
-                let cartData = cart.data;
-                cartElem.innerHTML = theCartTemplate({
-                cartData
-                });
-            });
-        }
-    })
-}
 
 let url2 = window.location.href
 const strs2 = url2.split('=');
@@ -192,11 +432,24 @@ let page = strs2.at(-1)
 if(page == 'checkout'){
     shippingSection.style.display = 'block'
     removeBrands.style.display = 'none';
-    shopBrabdTxt.style.display = 'none';
-    
+    shopBrabdTxt.style.display = 'none';   
 }
 
+auth.onAuthStateChanged(user => {
+    if(user !== null){
+        let email = user.email;
+        shipEmail.innerHTML = email
+    }
+})
+
 $('.carting').on('click', '.proceed', function (e) {
+
+    auth.onAuthStateChanged(user => {
+        if(user !== null){
+            let email = user.email;
+            shipEmail.innerHTML = email
+        }
+    })
     let url2 = window.location.href
     const strs2 = url2.split('=');
     let page = strs2.at(-1)
@@ -208,21 +461,29 @@ $('.carting').on('click', '.proceed', function (e) {
     }
 })
 
-$('.cart_items').on('click', '.bin_image', function (e) {
-    let cart_id = event.target.id;
-    axios
-    .post("/api/shoes/removeitem",{
-        id: cart_id,
-    })
-    .then(result => {
-        allCart()
-    });
+$('.cart_items').on('click', '.bin_del', function (e) {
+    let cart_id = e.target.id;
+    let email;
+
+    auth.onAuthStateChanged(user => {
+    if(user !== null){
+        email = user.email;
+        axios
+        .post("/api/shoes/removeitem",{
+            id: cart_id,
+            email: email
+        })
+        .then(result => {
+            allCart()
+        });
+    }
+})
+
 })
 
 $('.cart_items').on('click', '.plus', function (e) {
     let pluss = 'plus';
     let stock_id = e.target.id
-    //alert('plus')
 
     auth.onAuthStateChanged(user => {
         let email
@@ -245,7 +506,6 @@ $('.cart_items').on('click', '.plus', function (e) {
 $('.cart_items').on('click', '.minus', function (e) {
     let minuss = 'minus';
     let stock_id = e.target.id
-    //alert('minus')
    
     auth.onAuthStateChanged(user => {
         let email
@@ -272,9 +532,8 @@ signButton.addEventListener('click', function(e){
     let testPassword = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/
     let testEmail = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/
 
-
-
     if(testPassword.test(password) == false && password.length < 8){
+        err1.style.display = "block";
         err1.innerHTML = 'Password must be 8 characters or more.'
 
     }
@@ -284,6 +543,7 @@ signButton.addEventListener('click', function(e){
 
     if(testEmail.test(email) == false){
         err2.innerHTML = 'Please enter valid email.'
+        err2.style.display = "block";
 
     }
     if(testEmail.test(email) == true){
@@ -305,6 +565,12 @@ signButton.addEventListener('click', function(e){
 
         });
     }
+    setTimeout(() => {
+        err1.style.display = "none";
+      }, 5000);
+      setTimeout(() => {
+        err2.style.display = "none";
+      }, 5000);
 })
 
 logButton.addEventListener('click', function(e){
@@ -341,18 +607,26 @@ logButton.addEventListener('click', function(e){
             })
         }
         if(count == 0 && testPassword.test(password) == false && password.length < 8){
+            err4.style.display = "block"
             err4.innerHTML = "Enter valid passowrd"
         }
         if(count == 0 && testPassword.test(password) == false && password.length >= 8){
             err4.innerHTML = ''
         }
         if(count == 0 && testEmail.test(email) == false){
+            err3.style.display = "block"
             err3.innerHTML = 'Enter valid email'
         }
         if(count == 0 && testEmail.test(email) == true){
             err3.innerHTML = ''
         }
 
+        setTimeout(() => {
+            err3.style.display = "none";
+          }, 5000);
+          setTimeout(() => {
+            err4.style.display = "none";
+          }, 5000);
 
 
     })
@@ -360,8 +634,6 @@ logButton.addEventListener('click', function(e){
 })
 
 
-
-axios.defaults.baseURL = 'http://localhost:3018/';
 let url = window.location.href
 const strs = url.split('=');
 let id = Number(strs.at(-1))
@@ -403,32 +675,14 @@ $('.shop_brand').on('click', '#brands', function (e) {
     removeBrand();
 });
 
-auth.onAuthStateChanged(user => {
-
-    if(user !== null){
-        let email = user.email;
-        axios
-        .get(`/api/shoes/getcart/${email}`)
-        .then(result => {
-            let cart = result.data;
-            let cartData = cart.data;
-            cartElem.innerHTML = theCartTemplate({
-            cartData
-            });
-        });
-    }
-})
-
 logoutBtn.addEventListener('click', e => {
     err1.innerHTML = ''
-    err2.innerHTML = ""
+    err2.innerHTML = ''
     err3.innerHTML = ''
-    err4.innerHTML = ""
+    err4.innerHTML = ''
     e.preventDefault();
     auth.signOut();
-    //alert('User signed out!');
   })
-
 
 $('.shoes').on('click', '.add_cart',  function (e) {
     let stock_id = e.target.id
@@ -454,13 +708,15 @@ $('.shoes').on('click', '.add_cart',  function (e) {
 auth.onAuthStateChanged(user => {
     let green_dot = document.querySelector('.logged_in_color')
     if (user) {
-     // alert(user.email + " is logged in!");
       green_dot.style.display = 'inline-block'
+
     } else {
       green_dot.style.display = 'none'
+      empty.style.display = 'block'
     }
   });
 
+ 
 
 
 

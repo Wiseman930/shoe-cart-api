@@ -55,6 +55,38 @@ CREATE TABLE cart (
 );
 
 
+
+CREATE TABLE shipping (
+  id SERIAL NOT NULL PRIMARY KEY,
+  register_id INT NOT NULL REFERENCES register(id),
+  shipping_full_name TEXT NOT NULL,
+  shipping_country TEXT NOT NULL,
+  shipping_address TEXT NOT NULL,
+  shipping_city TEXT NOT NULL,
+  shipping_province TEXT NOT NULL,
+  shipping_zipcode TEXT NOT NULL,
+  shipping_phone_number VARCHAR(10) NOT NULL,
+  shipping_cost INT NOT NULL
+);
+
+CREATE TABLE ship_provinces (
+  province_name VARCHAR(255) NOT NULL,
+  shipping_cost VARCHAR(10) NOT NULL
+);
+
+INSERT INTO ship_provinces (province_name, shipping_cost) VALUES
+('Eastern Cape', 10),
+('Free State', 15),
+('Gauteng', 20),
+('KwaZulu-Natal', 25),
+('Limpopo', 30),
+('Mpumalanga', 35),
+('North West', 40),
+('Northern Cape', 45),
+('Western Cape', 50);
+
+
+
 /*Afani images*/
 insert into stockimages (id, image) values
  (1, 'https://github.com/Wiseman930/shoe-cart-api/blob/master/Images/Afani/Black.JPG?raw=true'),
@@ -104,45 +136,46 @@ insert into brands (id, brand) values
 
 /*all brand colors*/
 /*Afani colors*/
-insert into colors (id, brand_id, color) values (1, 1, 'black'),
- (2, 1, 'grey'),
- (3, 1, 'navy'),
- (4, 1, 'white'),
+insert into colors (id, brand_id, color) values 
+ (1, 1, 'Black'),
+ (2, 1, 'Grey'),
+ (3, 1, 'Navy'),
+ (4, 1, 'White'),
 
 /*Bellito colors*/
- (5, 2, 'green'),
- (6, 2, 'white'),
+ (5, 2, 'Green'),
+ (6, 2, 'White'),
 
 /*Seruto images*/
- (7, 3, 'light-blue'),
- (8, 3, 'light-green'),
- (9, 3, 'red'),
- (10, 3, 'yellow'),
+ (7, 3, 'Light-Blue'),
+ (8, 3, 'Light-Green'),
+ (9, 3, 'Red'),
+ (10, 3, 'Yellow'),
 
 /*Tago*/
- (11, 4, 'black'),
- (12, 4, 'brown'),
- (13, 4, 'white'),
+ (11, 4, 'Black'),
+ (12, 4, 'Brown'),
+ (13, 4, 'White'),
 
 /*Zing*/
- (14, 5, 'black-green'),
- (15, 5, 'black-white'),
- (16, 5, 'green'),
- (17, 5, 'white');
+ (14, 5, 'Black-Green'),
+ (15, 5, 'Black-White'),
+ (16, 5, 'Green'),
+ (17, 5, 'White');
 
 
 
 INSERT INTO names (id, brand_id, shoe_name)
-VALUES (1, 1, 'oxion'),
-       (2, 1, 'high x'),
-       (3, 2, 't brass'),
-       (4, 2, 'wild R5s'),
-       (5, 3, 'cool 6'),
-       (6, 4, 'mac g'),
-       (7, 4, 'flat t'),
-       (8, 4, 'superfly'),
-       (9, 5, 'aqua flex'),
-       (10, 5, 'zenlife');
+VALUES (1, 1, 'Oxion'),
+       (2, 1, 'High x'),
+       (3, 2, 'T brass'),
+       (4, 2, 'Wild R5s'),
+       (5, 3, 'Cool 6'),
+       (6, 4, 'Mac g'),
+       (7, 4, 'Flat t'),
+       (8, 4, 'Superfly'),
+       (9, 5, 'Aqua flex'),
+       (10, 5, 'Zenlife');
 
 
 

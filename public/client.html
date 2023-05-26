@@ -15,164 +15,68 @@
         {{#each shoeData}}
             <div class="brand_shoes">
                     <img src="{{image}}" class="stock_images"><br>
-                    <b>{{brand}}</b> -
-                    {{shoe_name}} | size {{size}}<span class="prices">R{{price}}</span><br>
-                    <button type="button" name="button" class="add_cart" id={{id}}>Add to cart</button><span class="add_color">{{color}}</span>
+                    <b>{{brand}}</b> | {{shoe_name}} | size {{size}}<span class="prices">R{{price}}</span><br>
+                   <div class ="cart_and_color"> <button type="button" name="button" class="add_cart" id={{id}}>Add to cart</button><span class="add_color2">{{color}}</span></div>
             </div>
         {{/each}}
         </div>
     </script>
+
     <script class="cartTemplate" type="text/x-template">
         <div class="display_cart">
             <div class="sub_div">
             {{#each cartData}}
                 <div class="cart_shoes">
-                        <div>
-                            <img src="{{image}}" class="cart_images"><br>
+                        <div class="cart-img">
+                            <img src="{{image}}" class="cart_images">
                         </div>
                         <div>
                             <div class="brand_name_size">
-                                <div>
-                                    <b>{{brand}}</b> - {{shoe_name}} | size {{size}}
-                                </div>
-                                </div>
+                                    <div class="section-1"> <b>{{brand}} |</b> </div> <div class="section-2">{{shoe_name}} |</div> <div class="section-3"> size {{size}}</div>
+                            </div>
                             <div class="color_delete">
                                 <div>
                                     <span class="add_color">{{color}}</span>
                                 </div>
                             </div>
-                            <span class="cart_prices">R{{price}} </span><br>
-
+                            <span class="cart_prices">R{{price}} </span>
                         <div class="number">
                             <div class="qty_num">
-                                <span class="minus" id={{id}}>-</span>
+                                <input type="button" class="minus" id={{stock_id}} value="-"/>
                                 <input type="text" class="qty" value="{{quantity}}"/>
-                                <span class="plus" id={{id}}>+</span>
+                                <input type="button" class="plus" id={{stock_id}} value="+" />
                             </div>
-
                             <div class="bin_del">
-                                <img src="https://github.com/Wiseman930/shoe-cart-api/blob/master/Images/ICONS/delete-bin.png?raw=true" id={{id}} alt="search" class="bin_image">
+                                <img src="https://github.com/Wiseman930/shoe-cart-api/blob/master/Images/ICONS/delete-bin.png?raw=true" id={{stock_id}} alt="search" class="bin_image">
                             </div>
                         </div>
                     </div>
                 </div>
             {{/each}}
-            <div>
-                
+            <div>                
             {{#each cartData}}
                 {{#if @first}}
                     <a href="/public/client.html?page=checkout" class="total_section">
-                        <div class="sub"><span class="sub_tot"><b>Subtotal</b> ({{count}} Items)</span> <span  class="price_tot"><b>R{{total}}</b></span></div>
+                        <div class="sub"><span class="sub_tot"><b>Subtotal</b> ({{count}} Item<span class="count-items">{{string}} </span>)</span> <span  class="price_tot"><b>R{{total}}</b></span></div>
                         <button class="proceed" id="brands" value="">Continue To Ceckout</button>
                     </a>
                 {{/if}}
             {{/each}}
+          
         </div>
-
-                <div class="display_stock">
-        {{#each shoeData}}
-            <div class="brand_shoes">
-                    <img src="{{image}}" class="stock_images"><br>
-                    <b>{{brand}}</b> -
-                    {{shoe_name}} | size {{size}}<span class="prices">R{{price}}</span><br>
-                    <button type="button" name="button" class="add_cart" id={{id}}>Add to cart</button><span class="add_color">{{color}}</span>
-            </div>
-        {{/each}}
         </div>
     </script>
-    <script class="cartTemplate" type="text/x-template">
-        <div class="display_cart">
-            <div class="sub_div">
-            {{#each cartData}}
-                <div class="cart_shoes">
-                        <div>
-                            <img src="{{image}}" class="cart_images"><br>
-                        </div>
-                        <div>
-                            <div class="brand_name_size">
-                                <div>
-                                    <b>{{brand}}</b> - {{shoe_name}} | size {{size}}
-                                </div>
-                                </div>
-                            <div class="color_delete">
-                                <div>
-                                    <span class="add_color">{{color}}</span>
-                                </div>
-                            </div>
-                            <span class="cart_prices">R{{price}} </span><br>
 
-                        <div class="number">
-                            <div class="qty_num">
-                                <span class="minus" id={{id}}>-</span>
-                                <input type="text" class="qty" value="{{quantity}}"/>
-                                <span class="plus" id={{id}}>+</span>
-                            </div>
-
-                            <div class="bin_del">
-                                <img src="https://github.com/Wiseman930/shoe-cart-api/blob/master/Images/ICONS/delete-bin.png?raw=true" id={{id}} alt="search" class="bin_image">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            {{/each}}
-            <div>
-                
-            {{#each cartData}}
-                {{#if @first}}
-                    <a href="/public/client.html?page=checkout" class="total_section">
-                        <div class="sub"><span class="sub_tot"><b>Subtotal</b> ({{count}} Items)</span> <span  class="price_tot"><b>R{{total}}</b></span></div>
-                        <button class="proceed" id="brands" value="">Continue To Ceckout</button>
-                    </a>
-                {{/if}}
-            {{/each}}
-        </div>
-
-        <div class="display_cart_1">
-            <div class="sub_div">
-            {{#each cartData}}
-                <div class="cart_shoes">
-                        <div>
-                            <img src="{{image}}" class="cart_images"><br>
-                        </div>
-                        <div>
-                            <div class="brand_name_size">
-                                <div>
-                                    <b>{{brand}}</b> - {{shoe_name}} | size {{size}}
-                                </div>
-                                </div>
-                            <div class="color_delete">
-                                <div>
-                                    <span class="add_color">{{color}}</span>
-                                </div>
-                            </div>
-                            <span class="cart_prices">R{{price}} </span><br>
-
-                        <div class="number">
-                            <div class="qty_num">
-                                <span class="minus" id={{id}}>-</span>
-                                <input type="text" class="qty" value="{{quantity}}"/>
-                                <span class="plus" id={{id}}>+</span>
-                            </div>
-
-                            <div class="bin_del">
-                                <img src="https://github.com/Wiseman930/shoe-cart-api/blob/master/Images/ICONS/delete-bin.png?raw=true" id={{id}} alt="search" class="bin_image">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            {{/each}}
-            <div>
-                
-            {{#each cartData}}
-                {{#if @first}}
-                    <a href="/public/client.html?page=checkout" class="total_section">
-                        <div class="sub"><span class="sub_tot"><b>Subtotal</b> ({{count}} Items)</span> <span  class="price_tot"><b>R{{total}}</b></span></div>
-                        <button class="proceed" id="brands" value="">Continue To Ceckout</button>
-                    </a>
-                {{/if}}
-            {{/each}}
-        </div>
+    <script class="shippingTemplate" type="text/x-template">    
+            <div>{{data2.shipping_full_name}}</div>
+            <div>{{data2.shipping_address}}</div>
+            <div>{{data2.shipping_city}}, {{data2.shipping_zipcode}}</div>
+            <div>{{data2.shipping_province}}</div>
+            <div>{{data2.shipping_country}}</div>  
+            <div class="express-shipping"><b>Exrpess Shipping</b> <span class="express-pricing">R{{data2.shipping_cost}}</span></div>
+            <div class="bussiness-days">3-5 bussiness days</div>  
     </script>
+
 </head>
 <body>
 <div class="navigation">
@@ -193,9 +97,9 @@
             </div>
             <div class="login_sign">
                 <h4 class="welcome">WELCOME</h4>
-                <p class="log log_pointer">LOGIN</p>
-                <p class="sign log_pointer">SIGN UP</p>
-                <p class="logout log_pointer">LOGOUT</p>
+                <p class="log" id="log_pointer">LOGIN</p>
+                <p class="sign" id="log_pointer">SIGN UP</p>
+                <p class="logoutBtn" id="log_pointer">LOGOUT</p>
             </div>
 
             <div class="login_page">
@@ -209,7 +113,7 @@
                 <input type="password" class="log_passowrd" name="passowrd" placeholder="Password"><br>
 
                 <button class="log_in">Log In</button>
-                <p class="no_account">Don't have an account?  Sign up</p>
+                <p class="no_account">Don't have an account?  <span class="show_up">Sign up</span></p>
             </div>
 
             <div class="signup_page">
@@ -223,13 +127,13 @@
                 <input type="password" class="sign_passowrd" name="passowrd" placeholder="Password"><br>
 
                 <button class="sign_in">Sign In</button>
-                <p class="no_account">Already have an account?  Sign In</p>
+                <p class="no_account">Already have an account?  <span class="show_in">Sign In</span></p>
             </div>
-
         </div>
         <div class="cart_icon">
-             <i class="fa-shopping-cart"></i>
-            <div class="cart_items">                
+            <img src="https://github.com/Wiseman930/shoe-cart-api/blob/master/Images/ICONS/shopping-cart.png?raw=true" alt="" class="cart_image">
+            <div class="cart_items">  
+                <h4 class="empty_cart"> Your cart is empty</h4>              
                 <span class="carting">
 
                 </span>
@@ -284,45 +188,100 @@
 <div>
     <div class="shipping">
         <h2 class="email-text">Email</h2>
-        <h2 class="ship-text">Shipping</h2>
-        <div class="full-name">
-          <input type="text" placeholder="full name" class="full-name-1"> 
+        <p class="logged-email"> </p>
+        <hr>
+        <div class="show-shipping">
+            <h2 class="ship-text">Shipping</h2>
+            <button class="edit-shipping-1" value="edit">Edit</button>
         </div>
-        <div class="country">
-          <select class="country-1">
-            <option value="United States">Country</option>
-            <option value="United States">United States</option>
-            <option value="Canada">Canada</option>
-            <option value="South Africa">South Africa</option>
-          </select>
+        <div class="shipp-information"> </div>
+        <div class="fill-shipping-data">
+            <div class="full-name">
+            <label class="name-error"> </label>
+            <input type="text" placeholder="Full Name" class="full-name-1"> 
+            </div>
+            <div class="country">
+            <label class="country-error"> </label>
+            <select class="country-1">
+                <option value="">Country</option>
+                <option value="United States">United States</option>
+                <option value="Canada">Canada</option>
+                <option value="South Africa">South Africa</option>
+            </select>
+            </div>
+            <div class="street-address">
+                <label class="address-error"> </label>
+                <input type="text" placeholder="Street Address" class="street-address-1">
+            </div>
+            <div class="city">
+                <label class="city-error"> </label>
+                <input type="text" placeholder="City" class="city-1">
+            </div>
+
+            <div class="two-fields">
+                <div class="prov_sec">
+                    <label class="province-error"> </label>            
+                    <select class="input-field-1">
+                        <option value="">Province</option>
+                        <option value="Western Cape">Western Cape</option>
+                        <option value="Eastern Cape">Eastern Cape</option>
+                        <option value="Northern Cape">Northern Cape</option>
+                        <option value="Free State">Free State</option>
+                        <option value="KwaZulu-Natal">KwaZulu-Natal</option>
+                        <option value="Limpopo">Limpopo</option>
+                        <option value="Mpumalanga">Mpumalanga</option>
+                        <option value="North West">North West</option>
+                    </select>
+                </div>
+                <div class="post-sec">
+                    <label class="postal-error"> </label>
+                    <input type="text" placeholder="Postal Code" class="input-field-2">
+                </div>
+            </div>
+            <div class="phone-number">
+                <label class="phone-error"> </label>
+                <input type="text" placeholder="Phone Number" class="phone-number-1">
+            </div>
+            <div class="add-shipping">
+                <button class="add-shipping-1" value="add-address">Add Shipping Address</button>
+            </div>
         </div>
-        <div class="street-address">
-            <input type="text" placeholder="Street address" class="street-address-1">
+
+        <div class="payment-section">
+            <h2>Payment Information</h2>
+            <div id="credit-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Visa_Logo.svg/64px-Visa_Logo.svg.png" alt="Visa">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/American_Express_Logo.svg/64px-American_Express_Logo.svg.png" alt="American Express">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Mastercard_logo.svg/64px-Mastercard_logo.svg.png" alt="Mastercard">
+              </div>
+              >
+              
+              
+            <div class="card-details">
+              <input type="text" id="card-number" placeholder="Enter your card number" required>
+              
+              <input type="text" id="card-name" placeholder="Enter cardholder name" required>
+              
+              <div class="row">
+                <div class="column">
+                  <input type="text" id="expiry-date" placeholder="MM/YY" required>
+                </div>
+                
+                <div class="column">
+                  <input type="text" id="cvv" placeholder="CVV" required>
+                </div>
+              </div>
+            </div>
+            
+            <div class="place-order">
+                <button class="place-order-1" value="order">Place Order</button>
+            </div>
           </div>
-          <div class="city">
-            <input type="text" placeholder="City" class="city-1">
-          </div>
-          <div class="two-fields">
-            <select class="input-field-1">
-                <option value="Western Cape">Province</option>
-                <option value="Western Cape">Western Cape</option>
-                <option value="Eastern Cape">Eastern Cape</option>
-                <option value="Northern Cape">Northern Cape</option>
-                <option value="Free State">Free State</option>
-                <option value="KwaZulu-Natal">KwaZulu-Natal</option>
-                <option value="Limpopo">Limpopo</option>
-                <option value="Mpumalanga">Mpumalanga</option>
-                <option value="North West">North West</option>
-              </select>
-            <input type="text" placeholder="Postal code" class="input-field-2">
-          </div>
-          <div class="phone-number">
-            <input type="text" placeholder="Phone number" class="phone-number-1">
-          </div>
-        <div class="add-shipping">
-            <button class="add-shipping-1">Add shipping address</button>
-        </div>
+          
+      
+
     </div>
+    
 </div>
 <footer>
     <div class="footer">
@@ -360,5 +319,4 @@
     <script src='./client.js' defer type="module"></script>
 </body>
 </html>
-
 

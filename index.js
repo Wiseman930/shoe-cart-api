@@ -65,7 +65,9 @@ app.get('/api/shoes/logerror', shoesApi.getLogCount)
 app.post('/api/shoes/postcart', shoesApi.postUserCart)
 app.post('/api/shoes/postqty', shoesApi.postUserQty)
 app.get('/api/shoes/getcart/:getcart', shoesApi.getCart);
-app.post('/api/shoes/removeitem', shoesApi.removeShoe)
+app.post('/api/shoes/removeitem', shoesApi.removeShoe);
+app.post('/api/shoes/shippinginfo', shoesApi.addShippingData);
+app.get('/api/shoes/shipinfo/:shipinfo', shoesApi.returnShippData)
 
 let PORT = process.env.PORT || 3018;
 app.listen(PORT, function(){

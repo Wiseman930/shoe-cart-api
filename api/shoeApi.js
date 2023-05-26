@@ -123,7 +123,23 @@ module.exports = function(shoeService, session) {
         try {
             let results = req.body;
             if(results){
-            await shoeService.removeTheShoe(results)
+                await shoeService.removeTheShoe(results)
+            }
+            res.json({
+                status: 'success',
+            });
+
+        } catch (err) {
+            next(err);
+
+        }
+    }
+
+    async function addShippingData(req, res, next){
+        try {
+            let results = req.body;
+            if(results){
+                await shoeService.addTheShippingData(results)
 
             }
             res.json({
@@ -133,6 +149,26 @@ module.exports = function(shoeService, session) {
         } catch (err) {
             next(err);
 
+        }
+    }
+
+    async function returnShippData(req, res, next){
+        try{
+
+           let email = req.params.shipinfo;
+           let results;
+           
+            if(email !== null){
+                 results = await shoeService.getShippingData(email);
+            }
+
+           res.json({
+            status: 'success',
+            data: results
+        });
+        }
+        catch (err) {
+            next(err);
         }
     }
 
@@ -151,7 +187,9 @@ module.exports = function(shoeService, session) {
         postUserCart,
         getCart,
         removeShoe,
-        postUserQty
+        postUserQty,
+        addShippingData,
+        returnShippData
 
     }
 }
