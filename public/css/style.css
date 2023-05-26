@@ -766,6 +766,22 @@ p{
   #cvv{
     height: 50px;
   }
+
+  .visa {
+    width: 100px;
+    height: 70px;
+  }
+  
+  .amex {
+    width: 100px;
+    height: 70px;
+  }
+  
+  .mastercard {
+    width: 100px;
+    height: 70px;
+  }
+  
   
   @media (min-width: 900px) {
     .icons{
