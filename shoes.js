@@ -51,6 +51,7 @@ module.exports = function ShoeApi(db){
 
     }
     async function postToCart(results){
+
         let email = results.email;
         let stock_id = results.stock;
 
@@ -65,10 +66,12 @@ module.exports = function ShoeApi(db){
         if(count.count == 0){
             await db.oneOrNone(`INSERT INTO cart (brand, color, size, price, quantity, stock_id, register_id, cart_image) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
             [cart_items.brand_id, cart_items.color_id, cart_items.size_id, cart_items.price, 1, cart_items.id, user_id.id, cart_items.image_id])
-           }
+        }
+    
            if(count.count == 1 && stockQuantity.quantity > cartQuantity.quantity){
            // await db.oneOrNone(`UPDATE cart SET quantity=quantity+1 WHERE stock_id=$1 and register_id=$2`, [stock_id, user_id.id])
            }
+        
     }
 
     async function postToQty(results){
@@ -126,16 +129,32 @@ module.exports = function ShoeApi(db){
             count = await db.manyOrNone(`SELECT SUM(quantity) AS quantity FROM cart WHERE register_id=$1`, [user_id.id])
             total = await db.manyOrNone('SELECT SUM(price) AS total FROM cart WHERE register_id=$1', [user_id.id])
 
-            const countObjects = cartShoes.map((object) => {
+            const tax = [{
+                tax: Math.floor(total[0].total * 0.14),
+            }];
+    
+            let shipping = await db.oneOrNone(`SELECT shipping_cost FROM shipping WHERE register_id=$1 `, [user_id.id]) 
+  
+  
+            if(shipping === null){
+                shipping = { 'shipping_cost': 0 } 
+            }
+
+            let countObjects = cartShoes.map((object) => {
                 object.count = count[0].quantity;
-                object.total = total[0].total;
+                object.total = Number(total[0].total) + Number(tax[0].tax) + Number(shipping.shipping_cost) ;
+                object.subtotal = total[0].total;
+                object.tax = tax[0].tax;
+                object.shipping = shipping.shipping_cost;
                 return object;
-            });
+                });
+          
             return countObjects;
         }catch(err){
             console.log(err)
         }
     }
+
     async function removeTheShoe(cart){
         let email = cart.email;
         let cartId = cart.id;
@@ -144,26 +163,26 @@ module.exports = function ShoeApi(db){
         await db.oneOrNone('DELETE from cart WHERE stock_id=$1 and register_id=$2', [cartId, user_id.id])
 
     }
-    async function addTheShippingData(data){
-        
+
+    async function addTheShippingData(data){      
         let email = data.email;
         let user_id =  await db.oneOrNone(`SELECT id FROM register WHERE email=$1`, [email])
         let fullNames =  data.fullName;
         let country = data.country;
         let address = data.address;
+        let address2 = data.address2;
         let theCity = data.city;
         let theProvince = data.province;
         let thePostalCode = data.postalCode;
         let thePhoneNumber =  data.phoneNumber;
         let shippingCost =  await db.oneOrNone(`SELECT shipping_cost FROM ship_provinces WHERE province_name=$1`, [theProvince])
-       
         let count = await db.oneOrNone(`SELECT COUNT(*) FROM shipping WHERE register_id=$1 `, 
         [user_id.id])
 
         if(count.count == 0){
-            await db.oneOrNone(`INSERT INTO shipping (register_id, shipping_full_name, shipping_country, shipping_address, shipping_city, shipping_province, shipping_zipcode, shipping_phone_number, shipping_cost)
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);`, 
-            [user_id.id, fullNames, country, address, theCity, theProvince, thePostalCode, thePhoneNumber, shippingCost.shipping_cost])
+            await db.oneOrNone(`INSERT INTO shipping (register_id, shipping_full_name, shipping_country, shipping_address, shipping_city, shipping_province, shipping_zipcode, shipping_phone_number, shipping_cost, shipping_address2) 
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);`, 
+            [user_id.id, fullNames, country, address, theCity, theProvince, thePostalCode, thePhoneNumber, shippingCost.shipping_cost, address2])
         }
         if(!count.count == 0){
             await db.oneOrNone(`UPDATE shipping
@@ -174,12 +193,11 @@ module.exports = function ShoeApi(db){
             shipping_province = $6,
             shipping_zipcode = $7,
             shipping_phone_number = $8,
-            shipping_cost = $9
+            shipping_cost = $9,
+            shipping_address2 = $10
             WHERE register_id = $1;`, 
-            [user_id.id, fullNames, country, address, theCity, theProvince, thePostalCode, thePhoneNumber, shippingCost.shipping_cost])
-        }
-        
-          
+            [user_id.id, fullNames, country, address, theCity, theProvince, thePostalCode, thePhoneNumber, shippingCost.shipping_cost, address2])
+        }          
     }
 
     async function getShippingData(email){

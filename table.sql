@@ -62,6 +62,7 @@ CREATE TABLE shipping (
   shipping_full_name TEXT NOT NULL,
   shipping_country TEXT NOT NULL,
   shipping_address TEXT NOT NULL,
+  shipping_address2 TEXT NOT NULL,
   shipping_city TEXT NOT NULL,
   shipping_province TEXT NOT NULL,
   shipping_zipcode TEXT NOT NULL,

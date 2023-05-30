@@ -57,7 +57,10 @@
             {{#each cartData}}
                 {{#if @first}}
                     <a href="/public/client.html?page=checkout" class="total_section">
-                        <div class="sub"><span class="sub_tot"><b>Subtotal</b> ({{count}} Item<span class="count-items">{{string}} </span>)</span> <span  class="price_tot"><b>R{{total}}</b></span></div>
+                        <div class="sub"><span class="sub_tot">Subtotal<span class="count-items"></span></span> <span  class="price_tot">R{{subtotal}}</span></div><br>
+                        <div class="sub"><span class="sub_tot">Tax<span class="count-items"></span></span> <span  class="price_tot">R{{tax}}</span></div><br>
+                        <div class="sub"><span class="sub_tot">Shipping<span class="count-items"></span></span> <span  class="price_tot">R{{shipping}}</span></div><br>
+                        <div class="sub"><span class="sub_tot"><b>Total</b> ({{count}} Item<span class="count-items">{{string}} </span>)</span> <span  class="price_tot"><b>R{{total}}</b></span></div>
                         <button class="proceed" id="brands" value="">Continue To Ceckout</button>
                     </a>
                 {{/if}}
@@ -70,7 +73,8 @@
     <script class="shippingTemplate" type="text/x-template">    
             <div>{{data2.shipping_full_name}}</div>
             <div>{{data2.shipping_address}}</div>
-            <div>{{data2.shipping_city}}, {{data2.shipping_zipcode}}</div>
+            <div>{{data2.shipping_address2}}</div>
+            <div>{{data2.shipping_city}}  {{data2.shipping_zipcode}}</div>
             <div>{{data2.shipping_province}}</div>
             <div>{{data2.shipping_country}}</div>  
             <div class="express-shipping"><b>Exrpess Shipping</b> <span class="express-pricing">R{{data2.shipping_cost}}</span></div>
@@ -96,10 +100,11 @@
                 <span class="logged_in_color"></span>
             </div>
             <div class="login_sign">
-                <h4 class="welcome">WELCOME</h4>
-                <p class="log" id="log_pointer">LOGIN</p>
+                <h4 class="welcome"> </h4>
+                <p class="logged-email2"> </p>
+                <p class="log" id="log_pointer">SIGN IN</p>
                 <p class="sign" id="log_pointer">SIGN UP</p>
-                <p class="logoutBtn" id="log_pointer">LOGOUT</p>
+                <p class="logoutBtn" id="log_pointer">LOG OUT</p>
             </div>
 
             <div class="login_page">
@@ -111,7 +116,8 @@
 
                 <label class="pass_log"> </label>
                 <input type="password" class="log_passowrd" name="passowrd" placeholder="Password"><br>
-
+                
+                <label class="success_log"> </label>
                 <button class="log_in">Log In</button>
                 <p class="no_account">Don't have an account?  <span class="show_up">Sign up</span></p>
             </div>
@@ -126,6 +132,7 @@
                 <label class="password_sign"> </label>
                 <input type="password" class="sign_passowrd" name="passowrd" placeholder="Password"><br>
 
+                <label class="success_sign"> </label>
                 <button class="sign_in">Sign In</button>
                 <p class="no_account">Already have an account?  <span class="show_in">Sign In</span></p>
             </div>
@@ -133,7 +140,7 @@
         <div class="cart_icon">
             <img src="https://github.com/Wiseman930/shoe-cart-api/blob/master/Images/ICONS/shopping-cart.png?raw=true" alt="" class="cart_image">
             <div class="cart_items">  
-                <h4 class="empty_cart"> Your cart is empty</h4>              
+              <h4 class="empty_cart"> Your cart is empty</h4>            
                 <span class="carting">
 
                 </span>
@@ -195,6 +202,7 @@
             <button class="edit-shipping-1" value="edit">Edit</button>
         </div>
         <div class="shipp-information"> </div>
+
         <div class="fill-shipping-data">
             <div class="full-name">
             <label class="name-error"> </label>
@@ -211,7 +219,11 @@
             </div>
             <div class="street-address">
                 <label class="address-error"> </label>
-                <input type="text" placeholder="Street Address" class="street-address-1">
+                <input type="text" placeholder="Address Line 1" class="street-address-1">
+            </div>
+            <div class="street-address">
+                <label class="address-error2"> </label>
+                <input type="text" placeholder="Address Line 2" class="street-address-2">
             </div>
             <div class="city">
                 <label class="city-error"> </label>
@@ -246,20 +258,25 @@
                 <button class="add-shipping-1" value="add-address">Add Shipping Address</button>
             </div>
         </div>
+        
+        <hr>
 
         <div class="payment-section">
             <h2>Payment Information</h2>
             <div id="credit-card">
-                <svg class="" xmlns="http://www.w3.org/2000/svg" > </svg>
+                <p class="credit-text">Credit Card</p>
+                <div class="card-photos">
+                    <img src="https://github.com/Wiseman930/shoe-cart-api/blob/master/Images/ICONS/card-images/vissa.jpg?raw=true" alt="Visa" class="visa">
+                    <img src="https://github.com/Wiseman930/shoe-cart-api/blob/master/Images/ICONS/card-images/american-express.jpg?raw=true" alt="American Express" class="amex">
+                    <img src="https://github.com/Wiseman930/shoe-cart-api/blob/master/Images/ICONS/card-images/mastercard.jpg?raw=true" alt="Mastercard" class="mastercard">
               </div>
-              
-              
-              
+            </div>
+                     
               
             <div class="card-details">
-              <input type="text" id="card-number" placeholder="Enter your card number" required>
+              <input type="text" id="card-number" placeholder="Your card number" required>
               
-              <input type="text" id="card-name" placeholder="Enter cardholder name" required>
+              <input type="text" id="card-name" placeholder="Enter card holder name" required>
               
               <div class="row">
                 <div class="column">
@@ -275,10 +292,7 @@
             <div class="place-order">
                 <button class="place-order-1" value="order">Place Order</button>
             </div>
-          </div>
-          
-      
-
+          </div>      
     </div>
     
 </div>

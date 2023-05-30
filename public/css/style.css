@@ -4,6 +4,7 @@ body{
     margin: 0;
     padding: 0;
     font-family: Trebuchet MS;
+  
 }
 
 #log_pointer {
@@ -97,7 +98,26 @@ h4{
     overflow: auto;
     z-index: 1;
     border: 1px solid rgba(0, 0, 0, 0.2);
-    display: none
+    display: none;
+}
+
+.bin_image:hover {
+  transform: scale(1.2);
+}
+.logo_image:hover {
+  transform: scale(1.2);
+}
+.user_image:hover {
+  transform: scale(1.2);
+}
+.minus:hover {
+  transform: scale(1.2);
+}
+.plus:hover {
+  transform: scale(1.2);
+}
+.cart_image:hover {
+  transform: scale(1.2);
 }
 .login_page{
     background-color: #FFFFFF;
@@ -105,13 +125,14 @@ h4{
     height: 400px;
     width: 350px;
     border-radius: 5px;
-    top: 50%; right: 50%;
+    top: 301px; right: 50%;
     transform: translate(50%,-50%);
     position: fixed !important;
     z-index:1;
     border: 1px solid rgba(0, 0, 0, 0.2);
     text-align: center;
     display: none;
+    box-shadow: 0 0 0 1600px rgba(0, 0, 0, 0.6)
 }
 .show_up{
     cursor: pointer;
@@ -125,13 +146,14 @@ h4{
     height: 400px;
     width: 350px;
     border-radius: 5px;
-    top: 50%; right: 50%;
+    top: 301px; right: 50%;
     transform: translate(50%,-50%);
     position: fixed !important;
     z-index:1;
     border: 1px solid rgba(0, 0, 0, 0.2);
     text-align: center;
     display: none;
+    box-shadow: 0 0 0 1600px rgba(0, 0, 0, 0.6)
 }
 .log_passowrd{
     width: 100%;
@@ -180,7 +202,7 @@ h4{
 .cart_items {
     background-color: #FFFFFF;
     width: 460px;
-    height: 100%;
+    height: 85%;
     padding: 30px;
     border-radius: 5px;
     position: fixed;
@@ -189,13 +211,14 @@ h4{
     overflow: auto;
     z-index: 1;
     border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 0 1600px rgba(0, 0, 0, 0.6);
     display: none;
 }
 .sub_div{
     padding-bottom: 40%;
 }
 .welcome{
-    margin-bottom: 20px;
+    margin-bottom: 5px;
 }
 .log{
     color: rgba(0, 0, 0, 0.5);
@@ -376,6 +399,14 @@ p{
     color: red;
     font-size: 12px;
 }
+.success_log{
+  color: green;
+  font-size: 12px;
+}
+.success_sign{
+  color: green;
+  font-size: 12px;
+}
 .cart_images{
     width: 150px;
     height: 150px;
@@ -526,7 +557,7 @@ p{
     padding-bottom: 10px;
     padding-top: 10px;
     width: 460px;
-    height: 10%;
+    height: 25%;
     background-color: #FFFFFF;
     font-size: 15px; 
     overflow: hidden;
@@ -544,13 +575,19 @@ p{
     margin-right: auto;
     display: none;
   }
-  
   .email-text{
     margin-left: 0px;
   }
   .logged-email{
     margin-left: 0px;
     font-size: 15px;
+    margin-bottom: 40px;
+  }
+  .logged-email2{
+    margin-left: 0px;
+    font-size: 15px;
+    color: grey;
+    margin-bottom: 20px;
   } 
   .full-name, .country, .street-address, .city, .two-fields, .phone-number, .add-shipping{
     width: 100%;
@@ -564,9 +601,9 @@ p{
     flex-direction: row;
     justify-content: space-between; 
   } 
-  .full-name-1, .country-1, .street-address-1, .city-1, .phone-number-1 {
+  .full-name-1, .country-1, .street-address-1, .street-address-2, .city-1, .phone-number-1 {
     width: 100%;
-    height: 50px;
+    height: 40px;
     font-family: Trebuchet MS;
     text-align: center;
     margin-bottom: 20px;
@@ -576,7 +613,7 @@ p{
   } 
   .input-field-1 {
     width: 100%;
-    height: 50px;
+    height: 40px;
     font-family: Trebuchet MS;
     text-align: center;
     margin-bottom: 20px;
@@ -586,11 +623,21 @@ p{
     background-color: #f0f0f0;
   }
   .fill-shipping-data{
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    width: 50%;
+    top: 366px; right: 50%;
+    transform: translate(50%,-50%);
+    position: fixed !important;
+    z-index: 99;
+    background-color: #FFFFFF;
+    padding: 30px;
     display: none;
+    box-shadow: 0 0 0 1600px rgba(0, 0, 0, 0.6)
   }
   .input-field-2 {
     width: 100%;
-    height: 50px;
+    height: 40px;
     font-family: Trebuchet MS;
     text-align: center;
     margin-bottom: 20px;
@@ -602,7 +649,7 @@ p{
     width: 100%;
     margin-top: 10px;
     margin-bottom: 60px;
-    height: 50px;
+    height: 40px;
     font-family: Trebuchet MS;
     text-align: center;
   }
@@ -648,7 +695,7 @@ p{
   
   }
 .shipp-information{
-    margin-bottom: 60px;
+    margin-bottom: 40px;
     font-size: 15px;
     color: rgba(0, 0, 0, 0.6);
 }
@@ -721,7 +768,7 @@ p{
     font-size: 15px;
   }
   
-  .payment-section h2 {
+  .payment-section {
     margin-bottom: 10px;
   }
   
@@ -768,27 +815,47 @@ p{
   }
 
   .visa {
-    width: 100px;
-    height: 70px;
+    width: 50px;
+    height: 30px;
   }
   
   .amex {
-    width: 100px;
-    height: 70px;
+    width: 50px;
+    height: 30px;
+    margin-left: 10px;
   }
   
   .mastercard {
-    width: 100px;
-    height: 70px;
+    width: 50px;
+    height: 30px;
+    margin-left: 10px;
   }
-  
+  .card-photos{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 30px;
+  }
+  .credit-text{
+    margin-right: auto;
+    justify-content: center;
+  }
+  #credit-card{
+    display: flex;
+    flex-direction: row;
+    
+  }
   
   @media (min-width: 900px) {
     .icons{
         display: flex !important;
+        z-index: 2;
+       
     }
   }
   @media (max-width: 900px) {
+    .fill-shipping-data{
+      width: 70%;
+    }
     .logged_in_color{
         width: 10px;
         height: 10px;
@@ -895,7 +962,7 @@ p{
     height: 400px;
     width: 250px;
     border-radius: 5px;
-    top: 50%; right: 50%;
+    top: 301px; right: 50%;
     transform: translate(50%,-50%);
     position: fixed !important;
     z-index:1;
@@ -909,7 +976,7 @@ p{
     height: 400px;
     width: 250px;
     border-radius: 5px;
-    top: 50%; right: 50%;
+    top: 301px; right: 50%;
     transform: translate(50%,-50%);
     position: fixed !important;
     z-index:1;
@@ -920,6 +987,10 @@ p{
   }
 
   @media (max-width: 600px) {
+    .fill-shipping-data{
+      top: 354px; right: 50%;
+      width: 70%;
+    }
     .logged_in_color{
         width: 10px;
         height: 10px;
@@ -948,8 +1019,40 @@ p{
         background-color: #f0f0f0; 
         display: none;  
       }
+      .login_page{
+        background-color: #FFFFFF;
+        padding:30px;
+        height: 410px;
+        width: 200px;
+        border-radius: 5px;
+        top: 294px; right: 50%;
+        transform: translate(50%,-50%);
+        position: fixed !important;
+        z-index:1;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        text-align: center;
+        display: none;
+    }
+    .signup_page{
+        background-color: #FFFFFF;
+        padding:30px;
+        height: 410px;
+        width: 200px;
+        border-radius: 5px;
+        top: 294px; right: 50%;
+        transform: translate(50%,-50%);
+        position: fixed !important;
+        z-index:1;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        text-align: center;
+        display: none;
+    }
   }
   @media (max-width: 380px) {
+    .fill-shipping-data{
+      top: 344px; right: 50%;
+      width: 70%;
+    }
     .logged_in_color{
         width: 10px;
         height: 10px;
@@ -959,6 +1062,23 @@ p{
         transform: translate(-38px, -38px);
         position: absolute !important;
       
+      }
+      .visa {
+        width: 37.5px;
+        height: 22.5px;
+      }
+      
+      .amex {
+        width: 37.5px;
+        height: 22.5px;
+      }
+      
+      .mastercard {
+        width: 37.5px;
+        height: 22.5px;
+      }
+      .credit-text{
+        font-size: 12px;
       }
       .logged-email{
         font-size: 12px;
@@ -1034,10 +1154,10 @@ p{
       .login_page{
         background-color: #FFFFFF;
         padding:30px;
-        height: 400px;
+        height: 410px;
         width: 200px;
         border-radius: 5px;
-        top: 50%; right: 50%;
+        top: 284px; right: 50%;
         transform: translate(50%,-50%);
         position: fixed !important;
         z-index:1;
@@ -1048,10 +1168,10 @@ p{
     .signup_page{
         background-color: #FFFFFF;
         padding:30px;
-        height: 400px;
+        height: 410px;
         width: 200px;
         border-radius: 5px;
-        top: 50%; right: 50%;
+        top: 284px; right: 50%;
         transform: translate(50%,-50%);
         position: fixed !important;
         z-index:1;
