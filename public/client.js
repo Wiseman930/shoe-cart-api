@@ -129,7 +129,36 @@ const userIcon = document.querySelector('.user_icon')
 let log_message = document.querySelector('.success_log')
 let sign_message = document.querySelector('.success_sign')
 
+let closeLogn = document.querySelector('.close-log')
+let closeSign = document.querySelector('.close-sign')
+let closeWelcome = document.querySelector('.close-welcome')
+let closeCart = document.querySelector('.close-cart')
+let closeShippingData = document.querySelector('.close-shipping-data')
+
+closeLogn.addEventListener('click', function(e){
+    userlogin.style.display = 'none'
+})
+
+closeSign.addEventListener('click', function(e){
+    userSignIn.style.display = 'none'
+})
+
+closeWelcome.addEventListener('click', function(e){
+    logSign.style.display = 'none'
+})
+
+closeCart.addEventListener('click', function(e){
+    cart_data.style.display = 'none'
+})
+
+closeShippingData.addEventListener('click', function(e){
+    shippingData.style.display = 'none'
+})
+
 signButton.addEventListener('click', function(e){
+
+    const user = auth.currentUser;
+    if(user == null){
     e.preventDefault();
     let email = signEmailAdress.value;
     let password = signPassowrd.value;
@@ -177,13 +206,13 @@ signButton.addEventListener('click', function(e){
         err2.style.display = "none";
         sign_message.style.display = "none"
       }, 5000);
+    }
 })
 
 logButton.addEventListener('click', function(e){
  
         const user = auth.currentUser;
         if(user == null){
-
             e.preventDefault();
             let email = logEmailAdress.value;
             let password = logPassowrd.value;
@@ -708,8 +737,6 @@ $('.cart_items').on('click', '.minus', function (e) {
 
 })
 
-
-
 let url = window.location.href
 const strs = url.split('=');
 let id = Number(strs.at(-1))
@@ -727,6 +754,14 @@ axios
 .then(result => {
     let shoes = result.data;
     let shoeData = shoes.data;
+    let buttonBrand = document.querySelector('#brands')
+    let shopByTxt = document.querySelector('.shop_by_text')
+    let text = buttonBrand.innerHTML;
+
+    if(id){
+    shopByTxt.innerHTML = 'Shop ' + shoeData[0].brand;
+    }
+    
     removeBrand();
     shoesElem.innerHTML = theShoesTemplate({
     shoeData

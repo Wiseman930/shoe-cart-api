@@ -25,11 +25,13 @@ a {
     margin-top: 5px;
 }
 .user_image{
+   cursor: pointer;
     width: 20px;
     height: 20px;
     margin-left: 25px;
 }
 .cart_image{
+    cursor: pointer;
     width: 20px;
     height: 20px;
     margin-left: 25px;
@@ -75,9 +77,7 @@ h4{
     margin: 0px;
 }
 
-/*.welcome{
-    
-}*/
+
 .search_by{
     display: block;
     translate: -700px 30px;
@@ -98,6 +98,7 @@ h4{
     overflow: auto;
     z-index: 1;
     border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 0 1600px rgba(0, 0, 0, 0.6);
     display: none;
 }
 
@@ -336,7 +337,6 @@ p{
     display: grid;
     margin-left: auto;
     margin-right: auto;
-   /* grid-template-columns: 1fr 1fr 1fr;*/
     place-items:  center;
     margin-bottom: 150px;
     display: flex;
@@ -526,7 +526,6 @@ p{
     width: 25px;
     height: 25px;
     text-align: center;
-    /*padding:5px;*/
     border:1px solid #ddd;
     margin-left: 10px;
     margin-right: 10px;
@@ -537,7 +536,6 @@ p{
     width:25px;
     height:25px;
     background:#f2f2f2;
-    /*padding:5px;*/
     border:1px solid #ddd;
     text-align: center;
   }
@@ -617,8 +615,6 @@ p{
     font-family: Trebuchet MS;
     text-align: center;
     margin-bottom: 20px;
-   /* float: left;
-    display: block;*/
     margin-right: 10px;
     background-color: #f0f0f0;
   }
@@ -626,7 +622,7 @@ p{
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     width: 50%;
-    top: 366px; right: 50%;
+    top: 379px; right: 50%;
     transform: translate(50%,-50%);
     position: fixed !important;
     z-index: 99;
@@ -641,8 +637,6 @@ p{
     font-family: Trebuchet MS;
     text-align: center;
     margin-bottom: 20px;
-    /*float: right;
-    display: block;*/
     margin-left: 0px;
   }
   .add-shipping-1{
@@ -844,15 +838,107 @@ p{
     flex-direction: row;
     
   }
-  
+  .close-log{
+    background-color: #f0f0f0;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    vertical-align:middle ;
+    translate: 355px -30px;
+    border-top-right-radius: 5px;
+    cursor: pointer;
+  }
+  .close-log:hover {
+    transform: scale(1.2);
+  }
+
+  .close-sign{
+    background-color: #f0f0f0;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    vertical-align:middle ;
+    translate: 355px -30px;
+    border-top-right-radius: 5px;
+    cursor: pointer;
+  }
+  .close-sign:hover {
+    transform: scale(1.2);
+  }
+  .close-welcome{
+    background-color: #f0f0f0;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    vertical-align: middle;
+    translate: 255px -30px;
+    border-top-right-radius: 5px;
+    cursor: pointer;
+  }
+  .close-welcome:hover{
+    transform: scale(1.2);
+  }
+  .close-cart{
+    background-color: #f0f0f0;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    vertical-align: middle;
+    translate: 0px 0px;
+    border-top-right-radius: 5px;
+    cursor: pointer;
+  }
+  .close-cart:hover{
+    transform: scale(1.2);
+  }
+  .close-shipping-data{
+    background-color: #f0f0f0;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    vertical-align: middle;
+    translate: 652px -30px;
+    border-top-right-radius: 5px;
+    cursor: pointer;
+  }
+  .close-shipping-data:hover{
+    transform: scale(1.2);
+  }
+  .login_page h2 {
+    margin-top: 0px;
+    padding-top: 0px;
+  }
+  .signup_page h2 {
+    margin-top: 0px;
+    padding-top: 0px;
+  }
+  .login_sign h2 {
+    margin-top: 0px;
+    padding-top: 0px;
+  }
   @media (min-width: 900px) {
     .icons{
         display: flex !important;
         z-index: 2;
        
     }
+    .close-welcome{
+      display: none;
+    }
+    .close-cart{
+      display: none;
+    }
   }
   @media (max-width: 900px) {
+    .close-log{
+      translate: 255px -30px;
+    }
+    .close-sign{
+      translate: 255px -30px;
+    }
+    .close-cart{
+      translate: 240px -15px;
+    }
     .fill-shipping-data{
       width: 70%;
     }
@@ -921,7 +1007,7 @@ p{
     height: 300px;
     width: 250px;
     border-radius: 5px;
-    top: 50%; right: 50%;
+    top: 252px; right: 50%;
     transform: translate(50%,-50%);
     position: fixed !important;
     z-index:1;
@@ -948,7 +1034,7 @@ p{
     height: 300px;
     width: 250px;
     border-radius: 5px;
-    top: 50%; right: 50%;
+    top: 237px; right: 50%;
     transform: translate(50%,-50%);
     position: fixed !important;
     z-index:1;
@@ -987,6 +1073,15 @@ p{
   }
 
   @media (max-width: 600px) {
+    .close-log{
+      translate: 205px -30px;
+    }
+    .close-sign{
+      translate: 205px -30px;
+    }
+    .close-cart{
+      translate: 190px -15px;
+    }
     .fill-shipping-data{
       top: 354px; right: 50%;
       width: 70%;
@@ -1005,6 +1100,16 @@ p{
         width: 200px;
         height: 48px;
         margin-bottom: 5px;
+    }
+    .cart_items{
+      padding:15px;
+      height: 300px;
+      width: 200px;
+      border-radius: 5px;
+      top: 226px; right: 50%;
+      transform: translate(50%,-50%);
+      position: fixed !important;
+      z-index:1;
     }
     .icons {     
         padding-right:0px;
@@ -1047,11 +1152,24 @@ p{
         text-align: center;
         display: none;
     }
+    .login_sign{
+      padding:30px;
+      height: 300px;
+      width: 250px;
+      border-radius: 5px;
+      top: 240px; right: 50%;
+      transform: translate(50%,-50%);
+      position: fixed !important;
+      z-index:1;
+    }
   }
   @media (max-width: 380px) {
     .fill-shipping-data{
       top: 344px; right: 50%;
       width: 70%;
+    }
+    .close-welcome{
+      translate: 205px -30px;
     }
     .logged_in_color{
         width: 10px;
@@ -1136,7 +1254,7 @@ p{
         height: 300px;
         width: 200px;
         border-radius: 5px;
-        top: 50%; right: 50%;
+        top: 230px; right: 50%;
         transform: translate(50%,-50%);
         position: fixed !important;
         z-index:1;
@@ -1146,7 +1264,7 @@ p{
         height: 300px;
         width: 200px;
         border-radius: 5px;
-        top: 50%; right: 50%;
+        top: 216px; right: 50%;
         transform: translate(50%,-50%);
         position: fixed !important;
         z-index:1;
@@ -1180,3 +1298,5 @@ p{
         display: none;
     }
   }
+
+  
